@@ -14,6 +14,7 @@ The accompanying report is *Rapport DYNAE.docx* (French), titled *Analyse modale
 | `Versions code/main_EMA_TD4_3.m` | Multi-reference EMA revision. It adds debug `flag` messages, conjugate-pole/residual fitting, and complex-mode averaging across references; after the method branch it calculates Auto-MAC, animates modes, and saves `PhiExp_<Method>.mat`. |
 | `Rapport DYNAE.docx` | Main project report and interpretation of the experimental campaign. |
 | `SUPPORTING_NOTES_SUMMARY.txt` | Consolidated code- and experiment-relevant content from the supporting working notes removed during portfolio preparation. |
+| `assets/figures/README.md` | Asset manifest for the report figures selected for the portfolio presentation. |
 
 > The measured UFF/UNV data files named by the scripts (`fram_frf.uff` and `fram_geo.unv`) are not present in this repository. The analysis cannot be run end-to-end without them.
 
