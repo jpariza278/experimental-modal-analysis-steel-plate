@@ -1,6 +1,6 @@
 # Experimental Modal Analysis of a Free Steel Plate
 
-MATLAB workflow and project report for identifying and validating the vibration modes of a free-boundary rectangular steel plate.
+MATLAB workflow and experimental study identifying and validating the vibration modes of a free-boundary rectangular steel plate.
 
 This was developed for the *Expérimentation et validation de modèles en dynamique des structures* course. It combines measured frequency-response functions (FRFs), experimental modal analysis (EMA), and comparison with a finite-element (FE) model.
 
@@ -12,19 +12,19 @@ This was developed for the *Expérimentation et validation de modèles en dynami
 - Identification of natural frequencies, damping ratios, poles, modal residues, and complex/real mode shapes.
 - Experimental-to-FE validation using MAC, COMAC, eCOMAC, frequency comparison, and FRF overlays.
 
-The report finds overall agreement between experimental and FE resonance frequencies. It also shows why exciter/sensor placement matters, especially for closely spaced modes around 280 Hz.
+The experimental and FE resonance frequencies show overall agreement. The work also demonstrates why exciter/sensor placement matters, especially for closely spaced modes around 280 Hz.
 
-The supporting work notes refine that point: the FE pre-test found nearby modes around 273 Hz and 277 Hz, so two independent shakers are advisable if the modes cannot be separated experimentally. They also document the 27-response × 3-reference FRF layout and the multi-reference mode-shape handling used by the MATLAB revision.
+The FE pre-test found nearby modes around 273 Hz and 277 Hz, so two independent shakers are advisable if the modes cannot be separated experimentally. The MATLAB workflow handles a 27-response × 3-reference FRF layout and multi-reference mode-shape identification.
 
 ## Repository guide
 
 | Path | Description |
 | --- | --- |
-| [`Versions code/main_EMA_TD4_3.m`](<Versions code/main_EMA_TD4_3.m>) | Multi-reference MATLAB EMA workflow; the best starting point for the reported three-shaker configuration. |
+| [`Versions code/main_EMA_TD4_3.m`](<Versions code/main_EMA_TD4_3.m>) | Multi-reference MATLAB EMA workflow; the best starting point for the three-shaker configuration. |
 | [`Versions code/main_EMA_R.m`](<Versions code/main_EMA_R.m>) | Earlier, single-reference-oriented EMA variant. |
 | [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) | Detailed project, code, input/output, and validation context. |
 | [`SUPPORTING_NOTES_SUMMARY.txt`](SUPPORTING_NOTES_SUMMARY.txt) | Consolidated implementation and experimental-design notes from the removed working documents. |
-| `Rapport DYNAE.docx` | Main project report (French). |
+| `Rapport DYNAE.docx` | Detailed technical report and extended discussion (French). |
 
 ## Method overview
 
@@ -50,7 +50,7 @@ The scripts can also run ODS (operating deflection shapes) and numerical modal a
 
 ### Experimental setup
 
-The experiment measures a free-boundary rectangular steel plate with 27 response sensors and three shakers, giving 81 FRFs. The report identifies the third shaker as problematic because it falls on nodal lines for some modes; the EMA pole-identification step therefore uses the first 54 FRFs from the two usable references.
+The experiment measures a free-boundary rectangular steel plate with 27 response sensors and three shakers, giving 81 FRFs. The third shaker falls on nodal lines for some modes and degrades the identification data; the EMA pole-identification step therefore uses the first 54 FRFs from the two usable references.
 
 ![Experimental mesh: 27 response sensors and 3 shakers](assets/figures/01-experimental-mesh.png)
 
@@ -62,7 +62,7 @@ The multivariate mode-indicator function (MvMIF) makes resonance candidates visi
 
 ### FRF quality checks and reconstruction
 
-The report records two successful qualitative checks before modal identification:
+Two qualitative checks confirm the FRF data before modal identification:
 
 - Colocated FRFs show an antiresonance between resonances and the expected phase rotations.
 - Reciprocal FRFs are symmetric, supporting the assumed reciprocal/linear behaviour.
@@ -81,7 +81,7 @@ The analysis produces complex mode shapes, aligns their phase across reference e
 
 ### Finite-element validation
 
-The report concludes that experimental and FE natural frequencies have good overall agreement. Validation combines global and coordinate-level measures:
+Experimental and FE natural frequencies have good overall agreement. Validation combines global and coordinate-level measures:
 
 - **MAC:** compares complete experimental and FE mode shapes; high matched entries indicate a good modal correspondence.
 - **COMAC/eCOMAC:** highlight coordinates with local differences. They identify where correlation is weaker, but do not on their own prove the physical origin of a discrepancy.
@@ -92,7 +92,7 @@ The report concludes that experimental and FE natural frequencies have good over
 ![eCOMAC map](assets/figures/08-ecomac.png)
 ![Experimental versus numerical frequency comparison](assets/figures/09-frequency-comparison.png)
 
-See [`assets/figures/README.md`](assets/figures/README.md) for the report-image source mapping and export guidance.
+See [`assets/figures/README.md`](assets/figures/README.md) for figure traceability and asset conventions.
 
 ## Requirements
 
@@ -113,7 +113,7 @@ The measurement files and the `uffread`/`lsce` implementations are not included 
 
 ## Important implementation note
 
-The report excludes the third shaker from modal identification because its position lies on nodal lines for some modes. `main_EMA_TD4_3.m` correctly limits LSCE pole identification to the first 54 FRFs, but its later residue/mode averaging loops still include all references. Before applying this code to the reported setup, make that exclusion consistent throughout the residue and mode-shape stages. See [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) for details.
+The third shaker is excluded from modal identification because its position lies on nodal lines for some modes. `main_EMA_TD4_3.m` correctly limits LSCE pole identification to the first 54 FRFs, but its later residue/mode averaging loops still include all references. Before applying this code to this setup, make that exclusion consistent throughout the residue and mode-shape stages. See [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) for details.
 
 ## Project status
 
@@ -121,4 +121,4 @@ Course project / archival portfolio repository. The code is retained as an analy
 
 ## Documentation
 
-The report and source code are primarily in French; this README and [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) provide an English entry point.
+The source code and detailed technical report are primarily in French; this README and [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) provide an English entry point. Read `Rapport DYNAE.docx` for the extended methodology, observations and discussion behind the project.

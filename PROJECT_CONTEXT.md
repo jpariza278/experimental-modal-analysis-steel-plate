@@ -21,11 +21,11 @@ The accompanying report is *Rapport DYNAE.docx* (French), titled *Analyse modale
 ## Experimental setup and key findings
 
 - The plate is tested in free boundary conditions.
-- The reported experimental mesh uses 27 response sensors and 3 shakers, producing 81 FRFs (27 responses × 3 references).
-- FRFs associated with the third shaker are excluded from the EMA pole-identification step. The report says that shaker is on a modal nodal line for some modes, which degrades the data; therefore only the first 54 FRFs, corresponding to shakers/nodes `0` and `21`, are used for identification.
-- The pre-test establishes that sensor and exciter placement matters: avoid nodal lines, and place response sensors in regions with measurable motion. The report concludes that at least 2 shakers and 8 sensors are needed for a reliable measurement of this plate.
-- Closely spaced modes are expected around 280 Hz. The report notes that multiple exciters are important for separating such modes in a real experiment.
-- Reported qualitative checks are successful: colocated FRFs show expected antiresonances and phase rotations, and reciprocal FRFs are symmetric. The FE and experimental resonance frequencies are described as globally well correlated.
+- The experimental mesh uses 27 response sensors and 3 shakers, producing 81 FRFs (27 responses × 3 references).
+- FRFs associated with the third shaker are excluded from the EMA pole-identification step because that shaker is on a modal nodal line for some modes, which degrades the data; therefore only the first 54 FRFs, corresponding to shakers/nodes `0` and `21`, are used for identification.
+- The pre-test establishes that sensor and exciter placement matters: avoid nodal lines, and place response sensors in regions with measurable motion. At least 2 shakers and 8 sensors are needed for a reliable measurement of this plate.
+- Closely spaced modes are expected around 280 Hz. Multiple exciters are important for separating such modes in a real experiment.
+- Qualitative checks are successful: colocated FRFs show expected antiresonances and phase rotations, and reciprocal FRFs are symmetric. The FE and experimental resonance frequencies are globally well correlated.
 
 ## MATLAB workflow
 
@@ -58,15 +58,15 @@ Both scripts are MATLAB scripts, not standalone functions. They require the cust
 
 ## Version notes and cautions
 
-- For the reported three-shaker experiment, start from `Versions code/main_EMA_TD4_3.m`: unlike `main_EMA_R.m`, it constructs a complex mode for each reference and then averages the result. The shared post-processing after its `end` performs the complex-to-real rotation, Auto-MAC, animation and `PhiExp` export.
-- `main_EMA_R.m` allocates `A` for all FRFs but, in its EMA branch, assigns all of `A(:,rmod)` to a `Psi(:,rmod)` vector sized only for responses. With the reported 81-FRF/27-response setup, that is dimensionally inconsistent; it must be corrected or restricted to one reference before use.
+- For the three-shaker experiment, start from `Versions code/main_EMA_TD4_3.m`: unlike `main_EMA_R.m`, it constructs a complex mode for each reference and then averages the result. The shared post-processing after its `end` performs the complex-to-real rotation, Auto-MAC, animation and `PhiExp` export.
+- `main_EMA_R.m` allocates `A` for all FRFs but, in its EMA branch, assigns all of `A(:,rmod)` to a `Psi(:,rmod)` vector sized only for responses. With the 81-FRF/27-response setup, that is dimensionally inconsistent; it must be corrected or restricted to one reference before use.
 - `main_EMA_TD4_3.m` fits both conjugate poles and a residual term, and averages complex modes obtained from references. Its `flag1`, `flag2` and `flag3:EMA` outputs appear to be debugging markers.
 - The scripts are interactive: several `pause` calls deliberately stop execution between diagnostics. They also open many figures.
 - The hard-coded `Hv(1:54,:)` selection assumes a particular FRF ordering (the first two references are the usable shakers). Verify this ordering against `loc` whenever a different data set is used.
-- Although pole identification uses only `Hv(1:54,:)`, `main_EMA_TD4_3.m` subsequently fits residues for all `nfunc` FRFs and averages all `nref` reference-derived modes. Thus, as written, it still reintroduces the third shaker during mode-shape construction; change those loops/reference indices if the report's 54-FRF exclusion is intended to apply throughout EMA.
+- Although pole identification uses only `Hv(1:54,:)`, `main_EMA_TD4_3.m` subsequently fits residues for all `nfunc` FRFs and averages all `nref` reference-derived modes. Thus, as written, it still reintroduces the third shaker during mode-shape construction; change those loops/reference indices if the 54-FRF exclusion is intended to apply throughout EMA.
 - The code assumes FRFs can be reshaped as `nresp × nref`; this depends on the UFF record ordering.
 - The scripts use hard-coded residue-fit frequency ranges (`1:350` Hz in `main_EMA_R.m`; `1:300` Hz in `main_EMA_TD4_3.m`). These should be checked against the actual measurement bandwidth and selected modes.
-- The report notes that high-frequency residual effects are not included. Adding upper residual terms is a potential improvement to the model fit.
+- High-frequency residual effects are not included. Adding upper residual terms is a potential improvement to the model fit.
 
 ## Validation interpretation
 
@@ -74,8 +74,8 @@ Validation should combine several views rather than rely on a single score:
 
 - **FRF overlay:** compare measured and synthesized resonance locations, amplitudes and antiresonances.
 - **Auto-MAC:** expect values near 1 on the diagonal and low off-diagonal values for distinct modes.
-- **Experimental vs FE modes:** use MAC for global mode-pair correlation; use COMAC/eCOMAC to locate coordinate-level discrepancies. The report cautions that a poor coordinate correlation does not by itself prove that the underlying modeling error originates at that coordinate.
-- **Frequency comparison:** compare the ordered experimental and FE natural frequencies; the report finds their overall trend consistent.
+- **Experimental vs FE modes:** use MAC for global mode-pair correlation; use COMAC/eCOMAC to locate coordinate-level discrepancies. A poor coordinate correlation does not by itself prove that the underlying modeling error originates at that coordinate.
+- **Frequency comparison:** compare the ordered experimental and FE natural frequencies; their overall trend is consistent.
 
 ## How to resume work
 
