@@ -1,0 +1,4 @@
+# Keep source files readable in diffs and identify report artifacts as binary.
+*.m text eol=lf
+*.md text eol=lf
+*.docx binary

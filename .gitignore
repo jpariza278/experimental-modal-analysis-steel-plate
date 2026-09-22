@@ -1,0 +1,22 @@
+# MATLAB editor/session and autosave artifacts
+*.asv
+*.m~
+*.mlx~
+slprj/
+codegen/
+*.mex*
+
+# MATLAB generated analysis output
+PhiExp_*.mat
+*.fig
+
+# Windows file-origin metadata
+*:Zone.Identifier
+
+# Operating-system clutter
+.DS_Store
+Thumbs.db
+
+# Local measurement data: keep the project portable unless explicitly curated
+fram_frf.uff
+fram_geo.unv
