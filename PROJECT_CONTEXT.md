@@ -13,7 +13,7 @@ The accompanying report is *Rapport DYNAE.docx* (French), titled *Analyse modale
 | `Versions code/main_EMA_R.m` | Earlier single-reference-oriented MATLAB implementation. It includes an intermediate and final FRF synthesis inside the EMA branch. |
 | `Versions code/main_EMA_TD4_3.m` | Multi-reference EMA revision. It adds debug `flag` messages, conjugate-pole/residual fitting, and complex-mode averaging across references; after the method branch it calculates Auto-MAC, animates modes, and saves `PhiExp_<Method>.mat`. |
 | `Rapport DYNAE.docx` | Main project report and interpretation of the experimental campaign. |
-| `PRE-TEST.docx`, `Notes TD4.docx`, `Notes Balthazar.docx`, `Questions 09_02.docx` | Supporting course/project notes. |
+| `SUPPORTING_NOTES_SUMMARY.txt` | Consolidated code- and experiment-relevant content from the supporting working notes removed during portfolio preparation. |
 
 > The measured UFF/UNV data files named by the scripts (`fram_frf.uff` and `fram_geo.unv`) are not present in this repository. The analysis cannot be run end-to-end without them.
 

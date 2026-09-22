@@ -1,0 +1,74 @@
+DYNAE TD6 — supporting-notes summary
+=====================================
+
+Purpose
+-------
+This file preserves the code/report-relevant content of the supporting working
+documents removed from the repository during portfolio preparation. It is not a
+replacement for "Rapport DYNAE.docx", which remains the primary project report.
+
+Experimental-design context
+---------------------------
+- The number of independent shakers should be at least the largest expected
+  modal multiplicity. The FE pre-test identified close natural frequencies near
+  273 Hz and 277 Hz; in a physical experiment they may behave as a double or
+  closely coupled mode, motivating the use of two shakers to distinguish them.
+- Do not place shakers on nodal lines. Spread them over the plate so excitation
+  is spatially representative and close modes can be separated.
+- Sensors should likewise be placed in regions that move for the modes of
+  interest. The sign convention for the measured Y-axis displacement must be
+  respected.
+
+Code/data model
+---------------
+- The full FRF matrix has one row per response/excitation pair and one column
+  per frequency: nFRF = nSensors * nExciters. For the reported setup this is
+  27 * 3 = 81 FRFs.
+- Complex/real mode-shape matrices are organized by response coordinates and
+  modes. A multi-reference implementation needs a separate mode estimate per
+  excitation reference, followed by phase alignment and averaging; it must not
+  treat an 81-row residue array as a single 27-response mode vector.
+- The temporary all-zero first row used while forming modes is removed with
+  "Psi = Psi(2:end,:)" before mapping the response vector into the global
+  three-degree-of-freedom geometry.
+- FRF synthesis evolves from a single-DOF picture (H = M*A) to a multi-DOF,
+  multi-input/multi-output model. A physically real FRF fit includes the
+  conjugate contribution of each complex pole. Upper residual terms account
+  for out-of-band higher-frequency modes and are a potential improvement.
+
+Implementation decisions and open checks
+----------------------------------------
+- LSCE is run using the first 54 FRFs because the third shaker degrades pole
+  identification. This channel selection must also be applied consistently to
+  residue fitting and reference averaging if the third shaker is to be fully
+  excluded.
+- The notes record that an LSCE extraction model size of about 10 identified
+  four expected modes in a trial. Frequency/damping tolerances and the fitting
+  band should nevertheless be verified against the actual data.
+- Historical code variants changed the residue-fit interval (for example
+  1:350 Hz, 1:390 Hz, or 10:390 Hz), corrected frequency-index dimensions with
+  "freq(1,:)", and increased FRF plot grids from 2x3 to 5x6 for 27 responses.
+  These are setup-specific details, not universal defaults.
+- The earlier main_EMA_R.m version has a known mode-shape dimension mismatch
+  for the 27-response/3-reference configuration. main_EMA_TD4_3.m addresses
+  that aspect by building and smoothing reference-specific complex modes, but
+  still needs the 54-FRF exclusion audit noted above.
+
+Validation concepts retained from the notes
+------------------------------------------
+- Colocated FRFs help inspect expected resonance/antiresonance behavior.
+- MvMIF is used to expose candidate resonances in the MIMO FRF set.
+- Complex-mode plots and Auto-MAC help assess modal complexity and independence.
+- FRFs are Fourier-domain representations; the IRF is their inverse Fourier
+  transform. Windowing and the distinction between periodic/steady-state and
+  transient signals matter when interpreting measurements.
+
+Source documents consolidated here
+----------------------------------
+- Questions 09_02.docx
+- PRE-TEST.docx
+- Notes TD4.docx
+- Notes Balthazar.docx
+- Notes on specific versions/EMA_R.docx
+- Notes on specific versions/Notes EMA V1.docx
+- Notes on specific versions/Notes EMA_TD4.2.1.docx

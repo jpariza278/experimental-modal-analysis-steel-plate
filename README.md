@@ -14,6 +14,8 @@ This was developed for the *Expérimentation et validation de modèles en dynami
 
 The report finds overall agreement between experimental and FE resonance frequencies. It also shows why exciter/sensor placement matters, especially for closely spaced modes around 280 Hz.
 
+The supporting work notes refine that point: the FE pre-test found nearby modes around 273 Hz and 277 Hz, so two independent shakers are advisable if the modes cannot be separated experimentally. They also document the 27-response × 3-reference FRF layout and the multi-reference mode-shape handling used by the MATLAB revision.
+
 ## Repository guide
 
 | Path | Description |
@@ -21,8 +23,8 @@ The report finds overall agreement between experimental and FE resonance frequen
 | [`Versions code/main_EMA_TD4_3.m`](<Versions code/main_EMA_TD4_3.m>) | Multi-reference MATLAB EMA workflow; the best starting point for the reported three-shaker configuration. |
 | [`Versions code/main_EMA_R.m`](<Versions code/main_EMA_R.m>) | Earlier, single-reference-oriented EMA variant. |
 | [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) | Detailed project, code, input/output, and validation context. |
+| [`SUPPORTING_NOTES_SUMMARY.txt`](SUPPORTING_NOTES_SUMMARY.txt) | Consolidated implementation and experimental-design notes from the removed working documents. |
 | `Rapport DYNAE.docx` | Main project report (French). |
-| `PRE-TEST.docx` and notes | Supporting pre-test and implementation notes (French). |
 
 ## Method overview
 
