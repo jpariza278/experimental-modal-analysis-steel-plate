@@ -52,21 +52,13 @@ The scripts can also run ODS (operating deflection shapes) and numerical modal a
 
 The experiment measures a free-boundary rectangular steel plate with 27 response sensors and three shakers, giving 81 FRFs. The report identifies the third shaker as problematic because it falls on nodal lines for some modes; the EMA pole-identification step therefore uses the first 54 FRFs from the two usable references.
 
-> **Figure placeholder — experimental mesh**
->
-> Add [`assets/figures/01-experimental-mesh.png`](assets/figures/README.md): sensor locations in blue and shaker locations in red.
-
-<!-- ![Experimental mesh: 27 response sensors and 3 shakers](assets/figures/01-experimental-mesh.png) -->
+![Experimental mesh: 27 response sensors and 3 shakers](assets/figures/01-experimental-mesh.png)
 
 ### Resonance identification
 
 The multivariate mode-indicator function (MvMIF) makes resonance candidates visible across the MIMO measurement set. A closely spaced pair is expected near 280 Hz; the supporting FE pre-test places this pair near 273 Hz and 277 Hz, explaining the need for multiple independent shakers.
 
-> **Figure placeholder — multivariate MIF**
->
-> Add [`assets/figures/02-mvmif.png`](assets/figures/README.md): MvMIF over the measurement bandwidth, with the close resonances visible.
-
-<!-- ![Multivariate mode indicator function](assets/figures/02-mvmif.png) -->
+![Multivariate mode indicator function](assets/figures/02-mvmif.png)
 
 ### FRF quality checks and reconstruction
 
@@ -77,27 +69,15 @@ The report records two successful qualitative checks before modal identification
 
 EMA then identifies poles, damping and residues, and reconstructs FRFs for comparison with measured data. Agreement in resonance locations is the primary evidence that the identified model captures the plate dynamics; amplitude differences indicate where modeling or experimental conditions may differ.
 
-> **Figure placeholder — colocated FRFs**
->
-> Add [`assets/figures/03-colocated-frfs.png`](assets/figures/README.md): magnitude and phase checks.
+![Colocated FRF magnitude and phase](assets/figures/03-colocated-frfs.png)
 
-<!-- ![Colocated FRF magnitude and phase](assets/figures/03-colocated-frfs.png) -->
-
-> **Figure placeholder — FRF comparison**
->
-> Add [`assets/figures/04-frf-model-comparison.png`](assets/figures/README.md): representative measured and model/FE FRF overlays.
-
-<!-- ![Measured and model FRF comparison](assets/figures/04-frf-model-comparison.png) -->
+![Measured and model FRF comparison](assets/figures/04-frf-model-comparison.png)
 
 ### Identified mode shapes
 
 The analysis produces complex mode shapes, aligns their phase across reference excitations, and extracts real normal modes for interpretation and animation. The pre-test emphasizes that shakers and sensors must avoid nodal lines and cover moving regions of the plate.
 
-> **Figure placeholder — representative normal mode**
->
-> Add [`assets/figures/05-representative-mode-shape.png`](assets/figures/README.md): one representative extracted mode or a labelled composite of several modes.
-
-<!-- ![Representative extracted normal mode shape](assets/figures/05-representative-mode-shape.png) -->
+![Representative extracted normal mode shape](assets/figures/05-representative-mode-shape.png)
 
 ### Finite-element validation
 
@@ -107,19 +87,10 @@ The report concludes that experimental and FE natural frequencies have good over
 - **COMAC/eCOMAC:** highlight coordinates with local differences. They identify where correlation is weaker, but do not on their own prove the physical origin of a discrepancy.
 - **Frequency comparison:** verifies that the experimental and numerical modal-frequency trends agree.
 
-> **Figure placeholders — validation results**
->
-> - Add [`assets/figures/06-mac-experimental-vs-fe.png`](assets/figures/README.md): experimental-versus-FE MAC matrix.
-> - Add [`assets/figures/07-comac.png`](assets/figures/README.md): COMAC map.
-> - Add [`assets/figures/08-ecomac.png`](assets/figures/README.md): eCOMAC map.
-> - Add [`assets/figures/09-frequency-comparison.png`](assets/figures/README.md): experimental-versus-numerical frequency comparison.
-
-<!--
 ![Experimental versus FE MAC](assets/figures/06-mac-experimental-vs-fe.png)
 ![COMAC map](assets/figures/07-comac.png)
 ![eCOMAC map](assets/figures/08-ecomac.png)
 ![Experimental versus numerical frequency comparison](assets/figures/09-frequency-comparison.png)
--->
 
 See [`assets/figures/README.md`](assets/figures/README.md) for the report-image source mapping and export guidance.
 

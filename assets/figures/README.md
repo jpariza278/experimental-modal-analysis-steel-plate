@@ -5,8 +5,7 @@ README already contains a visible placeholder and caption for each one; replace
 each placeholder with the corresponding Markdown image link after adding it.
 
 The source mapping refers to the embedded media inside `Rapport DYNAE.docx`.
-It is included to make the original figure easy to locate; the source images
-are deliberately not copied into this repository yet.
+It is retained to make each portfolio figure easy to trace back to the report.
 
 | Filename to add | Report source | Search this text in the report | What it should show | README section |
 | --- | --- | --- | --- | --- |
@@ -20,7 +19,7 @@ are deliberately not copied into this repository yet.
 | `08-ecomac.png` | `word/media/image21.png` | `Image d'eCOMAC` | eCOMAC map over the FE mesh. | FE validation |
 | `09-frequency-comparison.png` | `word/media/image23.png` | `Comparaison des fréquences` | Experimental and numerical natural-frequency comparison. | FE validation |
 
-## Preparing images
+## Asset conventions
 
 - Export/crop each figure from the report at readable resolution; PNG is
   preferred for plots and linework.
